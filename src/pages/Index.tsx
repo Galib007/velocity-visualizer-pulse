@@ -68,13 +68,13 @@ const Index = () => {
           </p>
         </section>
 
-        {/* Connection Info */}
+        {/* Connection Info - Bento Grid */}
         <ConnectionInfo />
 
-        {/* Speed Test Panel */}
+        {/* Speed Test Panel - Bento Grid */}
         <SpeedTestPanel onTestComplete={addTestResult} />
 
-        {/* Test History */}
+        {/* Test History - Bento Grid */}
         {testHistory.length > 0 && (
           <TestHistory history={testHistory} onClearHistory={clearHistory} />
         )}
