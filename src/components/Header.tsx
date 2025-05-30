@@ -49,7 +49,7 @@ export const Header = () => {
       }
     };
 
-    let schemaScript = document.querySelector('script[type="application/ld+json"]');
+    let schemaScript = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
     if (!schemaScript) {
       schemaScript = document.createElement('script');
       schemaScript.type = 'application/ld+json';
