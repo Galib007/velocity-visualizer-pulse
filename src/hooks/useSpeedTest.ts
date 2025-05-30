@@ -78,7 +78,8 @@ export const useSpeedTest = (onTestComplete: (result: SpeedTestResult) => void) 
     setIsRunning(true);
     setProgress(0);
     
-    const testSequence: MetricType[] = ['ping', 'jitter', 'download', 'upload'];
+    // Updated sequence: Download → Upload → Ping → Jitter
+    const testSequence: MetricType[] = ['download', 'upload', 'ping', 'jitter'];
     const newMetrics: Metrics = {
       downloadSpeed: 0,
       uploadSpeed: 0,

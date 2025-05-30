@@ -1,8 +1,9 @@
 
 import { useEffect } from 'react';
-import { Wifi, Moon, Sun } from 'lucide-react';
+import { Wifi, Moon, Sun, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/hooks/useTheme';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   const { theme, toggleTheme } = useTheme();
@@ -61,24 +62,38 @@ export const Header = () => {
   return (
     <header className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <Wifi className="h-6 w-6 text-blue-600 dark:text-blue-400" />
           <span className="text-xl font-bold text-gray-900 dark:text-white">SpeedTest</span>
-        </div>
+        </Link>
         
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={toggleTheme}
-          className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-          aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? (
-            <Sun className="h-5 w-5" />
-          ) : (
-            <Moon className="h-5 w-5" />
-          )}
-        </Button>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            asChild
+            className="hidden sm:inline-flex rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            <Link to="/blog">
+              <BookOpen className="h-4 w-4 mr-1" />
+              Blog
+            </Link>
+          </Button>
+          
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleTheme}
+            className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </Button>
+        </div>
       </div>
     </header>
   );

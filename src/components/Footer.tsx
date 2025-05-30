@@ -1,6 +1,7 @@
 
 import { Card } from '@/components/ui/card';
 import { Heart, Shield, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
@@ -38,10 +39,32 @@ export const Footer = () => {
           </Card>
         </div>
         
-        <div className="text-center pt-6 border-t border-gray-200 dark:border-gray-700">
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            © 2024 SpeedTest App. Built with love for better internet experiences.
-          </p>
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              © 2024 SpeedTest App. Built with love for better internet experiences.
+            </p>
+            <div className="flex flex-wrap justify-center sm:justify-end gap-4 text-sm">
+              <Link 
+                to="/contact" 
+                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                Contact Us
+              </Link>
+              <Link 
+                to="/privacy" 
+                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link 
+                to="/terms" 
+                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                Terms & Conditions
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
