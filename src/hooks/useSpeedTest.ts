@@ -1,15 +1,9 @@
 
 import { useState, useCallback } from 'react';
 import { SpeedTestResult } from '@/pages/Index';
-
-type MetricType = 'ping' | 'jitter' | 'download' | 'upload';
-
-interface Metrics {
-  downloadSpeed: number;
-  uploadSpeed: number;
-  ping: number;
-  jitter: number;
-}
+import { MetricType, Metrics } from '@/types/speedTest';
+import { simulateMetricTest } from '@/utils/speedTestSimulation';
+import { getConnectionInfo } from '@/utils/connectionInfo';
 
 export const useSpeedTest = (onTestComplete: (result: SpeedTestResult) => void) => {
   const [isRunning, setIsRunning] = useState(false);
@@ -22,58 +16,6 @@ export const useSpeedTest = (onTestComplete: (result: SpeedTestResult) => void) 
     ping: 0,
     jitter: 0
   });
-
-  const simulateMetricTest = async (metric: MetricType): Promise<number> => {
-    const duration = 3000; // 3 seconds per test
-    const steps = 30;
-    const stepDuration = duration / steps;
-    
-    return new Promise((resolve) => {
-      let currentStep = 0;
-      
-      const interval = setInterval(() => {
-        currentStep++;
-        const progressPercent = (currentStep / steps) * 100;
-        setProgress(progressPercent);
-        
-        if (currentStep >= steps) {
-          clearInterval(interval);
-          
-          // Simulate realistic values based on metric type
-          let value: number;
-          switch (metric) {
-            case 'ping':
-              value = Math.random() * 50 + 10; // 10-60ms
-              break;
-            case 'jitter':
-              value = Math.random() * 10 + 1; // 1-11ms
-              break;
-            case 'download':
-              value = Math.random() * 100 + 20; // 20-120 Mbps
-              break;
-            case 'upload':
-              value = Math.random() * 50 + 10; // 10-60 Mbps
-              break;
-            default:
-              value = 0;
-          }
-          
-          resolve(value);
-        }
-      }, stepDuration);
-    });
-  };
-
-  const getConnectionInfo = () => {
-    // Simulate connection detection
-    const connectionTypes = ['WiFi', '4G', '5G', 'Fiber', 'Cable', 'DSL'];
-    const providers = ['Verizon', 'AT&T', 'Comcast', 'Spectrum', 'T-Mobile', 'Local ISP'];
-    
-    return {
-      connectionType: connectionTypes[Math.floor(Math.random() * connectionTypes.length)],
-      provider: providers[Math.floor(Math.random() * providers.length)]
-    };
-  };
 
   const startTest = useCallback(async () => {
     setIsRunning(true);
@@ -94,7 +36,7 @@ export const useSpeedTest = (onTestComplete: (result: SpeedTestResult) => void) 
         setCurrentMetric(metric);
         setProgress(0);
         
-        const value = await simulateMetricTest(metric);
+        const value = await simulateMetricTest(metric, setProgress);
         
         switch (metric) {
           case 'ping':
