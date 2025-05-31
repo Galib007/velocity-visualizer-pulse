@@ -43,23 +43,23 @@ export const GoButton = ({ isRunning, currentMetric, progress, onStart }: GoButt
   };
 
   return (
-    <div className="relative flex items-center justify-center">
-      {/* Outer ripple effects */}
+    <div className="relative flex items-center justify-center min-h-[300px] sm:min-h-[400px] md:min-h-[500px] w-full">
+      {/* Outer ripple effects - responsive sizes */}
       <div 
         className={`
-          absolute w-96 h-96 rounded-full border-4 opacity-20 animate-ping
+          absolute w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full border-2 sm:border-4 opacity-20 animate-ping
           ${showIntenseRipple ? 'border-purple-500' : 'border-blue-400'}
         `}
       />
       <div 
         className={`
-          absolute w-80 h-80 rounded-full border-4 opacity-30 animate-pulse
+          absolute w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full border-2 sm:border-4 opacity-30 animate-pulse
           ${showIntenseRipple ? 'border-pink-500' : 'border-blue-500'}
         `}
       />
       <div 
         className={`
-          absolute w-64 h-64 rounded-full border-4 opacity-40 animate-ping
+          absolute w-48 h-48 sm:w-64 sm:h-64 md:w-64 md:h-64 rounded-full border-2 sm:border-4 opacity-40 animate-ping
           ${showIntenseRipple ? 'border-orange-500' : 'border-blue-600'}
         `}
         style={{ animationDelay: '0.5s' }}
@@ -69,7 +69,7 @@ export const GoButton = ({ isRunning, currentMetric, progress, onStart }: GoButt
       <div className="relative">
         {/* Progress ring */}
         {isRunning && (
-          <svg className="absolute inset-0 w-48 h-48 transform -rotate-90" viewBox="0 0 100 100">
+          <svg className="absolute inset-0 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 transform -rotate-90" viewBox="0 0 100 100">
             <circle
               cx="50"
               cy="50"
@@ -101,12 +101,12 @@ export const GoButton = ({ isRunning, currentMetric, progress, onStart }: GoButt
           </svg>
         )}
         
-        {/* Main GO button */}
+        {/* Main GO button - responsive sizes */}
         <button
           onClick={onStart}
           disabled={isRunning}
           className={`
-            relative w-48 h-48 rounded-full text-4xl font-bold text-white
+            relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full text-xl sm:text-2xl md:text-4xl font-bold text-white
             transition-all duration-300 transform hover:scale-105 disabled:transform-none
             shadow-2xl
             ${isRunning 
@@ -127,10 +127,10 @@ export const GoButton = ({ isRunning, currentMetric, progress, onStart }: GoButt
           <span className="relative z-10 text-center">
             {isRunning ? (
               <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold mb-1">
+                <div className="text-lg sm:text-xl md:text-2xl font-bold mb-1">
                   {Math.round(getStepProgress())}%
                 </div>
-                <div className="text-sm opacity-90">
+                <div className="text-xs sm:text-sm opacity-90">
                   {getCurrentStepText().replace('Testing ', '').replace('...', '')}
                 </div>
               </div>
